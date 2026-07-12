@@ -1,6 +1,7 @@
 streamlit>=1.59
 pandas>=3.0
 numpy>=2.5
+scipy>=1.11
 plotly>=6.8
 PuLP>=3.3
 highspy>=1.15
