@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Levisol Supply Chain — Power Up 4.0 Submission</title>
+<style>
+  :root{
+    --green:#009543; --dark:#1b3a2b; --red:#ED1C24; --gold:#F4B400;
+    --blue:#2b6cb0; --grey:#6b7280; --light:#e8f3ec; --ink:#222;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  @page{ size:A4; margin:0; }
+  body{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    color:var(--ink); font-size:11.5px; line-height:1.5;
+    counter-reset:pg;
+  }
+  .page{counter-increment:pg;}
+  .pageno::after{content:"Page " counter(pg) " of 8";}
+  /* Each .page is exactly one A4 sheet (overflow hidden so nothing bleeds
+     onto a phantom next page) */
+  .page{
+    width:210mm; height:297mm; overflow:hidden; padding:18mm 16mm 16mm 16mm;
+    position:relative; page-break-after:always; background:#fff;
+  }
+  .page:last-child{page-break-after:auto;}
+
+  h1,h2,h3{color:var(--dark); margin:0 0 6px 0; line-height:1.2;}
+  h2{font-size:20px; font-weight:800;}
+  h3{font-size:14px; font-weight:700; margin-top:14px;}
+  p{margin:0 0 8px 0;}
+  .muted{color:var(--grey);}
+  .small{font-size:10px;}
+  strong{color:var(--dark);}
+
+  /* Brand bar at top of content pages */
+  .brandbar{
+    display:flex; align-items:center; justify-content:space-between;
+    border-bottom:3px solid var(--green); padding-bottom:7px; margin-bottom:14px;
+  }
+  .logo{display:flex; align-items:center; gap:8px;}
+  .logo-svg{height:26px; width:108px; display:block;}
+  .cover .logo-svg{height:42px; width:174px;}
+  .powerup{font-size:10px; font-weight:800; color:var(--green); letter-spacing:1px;}
+  .powerup b{color:var(--red);}
+
+  /* Section header ribbon */
+  .ribbon{
+    background:var(--dark); color:#fff; padding:8px 14px; border-radius:4px;
+    font-weight:800; font-size:14px; letter-spacing:.4px; margin:0 0 12px 0;
+    display:flex; align-items:center; gap:10px;
+  }
+  .ribbon .tag{
+    background:var(--gold); color:var(--dark); font-size:10px; padding:2px 8px;
+    border-radius:10px; font-weight:800;
+  }
+
+  .accent{height:6px; width:100%; display:flex; margin:0 0 0 0;}
+  .accent i{flex:1;} .accent .g{background:var(--gold);} .accent .d{background:var(--dark);}
+
+  table{width:100%; border-collapse:collapse; margin:8px 0 12px 0; font-size:10.5px;}
+  th{background:var(--dark); color:#fff; text-align:left; padding:6px 8px; font-weight:700;}
+  td{padding:5px 8px; border-bottom:1px solid #e3e3e3;}
+  tr:nth-child(even) td{background:#f6faf7;}
+  td.num,th.num{text-align:right;}
+
+  .grid2{display:flex; gap:14px;}
+  .grid2 > div{flex:1;}
+  .kpicol{display:flex; flex-direction:column; gap:10px; justify-content:center;}
+
+  /* Component flow strip */
+  .flow{display:flex; align-items:stretch; gap:8px; margin:8px 0 4px 0;}
+  .flow .step{
+    flex:1; background:var(--light); border:1px solid var(--green); border-radius:6px;
+    padding:10px 12px; text-align:center;
+  }
+  .flow .step b{display:block; color:var(--dark); font-size:11px;}
+  .flow .step span{display:block; font-size:9.5px; color:var(--grey); margin-top:2px;}
+  .flow .link{
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    max-width:74px; text-align:center;
+  }
+  .flow .link i{font-style:normal; color:var(--green); font-weight:800; font-size:15px; line-height:1;}
+  .flow .link em{font-style:normal; font-size:8.5px; color:var(--grey); margin-top:2px;}
+
+  .kpis{display:flex; gap:10px; margin:10px 0 4px 0;}
+  .kpi{
+    flex:1; background:var(--light); border-left:4px solid var(--green);
+    border-radius:4px; padding:10px 12px;
+  }
+  .kpi .v{font-size:20px; font-weight:800; color:var(--dark);}
+  .kpi .l{font-size:9.5px; color:var(--grey); text-transform:uppercase; letter-spacing:.4px;}
+  .kpi.red{border-left-color:var(--red);}
+  .kpi.gold{border-left-color:var(--gold);}
+  .kpi.blue{border-left-color:var(--blue);}
+
+  .callout{
+    background:#fff7e6; border:1px solid var(--gold); border-radius:6px;
+    padding:10px 14px; margin:10px 0;
+  }
+  .callout .h{font-weight:800; color:#8a6d00; margin-bottom:3px;}
+
+  .win{background:var(--light); border:1px solid var(--green); border-radius:6px; padding:10px 14px; margin:10px 0;}
+
+  img.chart{width:100%; border:1px solid #e3e3e3; border-radius:4px; margin:6px 0 10px 0;}
+
+  .foot{
+    position:absolute; bottom:8mm; left:16mm; right:16mm;
+    border-top:1px solid #ddd; padding-top:5px;
+    display:flex; justify-content:space-between; font-size:9px; color:var(--grey);
+  }
+  ul{margin:4px 0 10px 0; padding-left:18px;}
+  li{margin-bottom:4px;}
+  .formula{
+    background:#f2f6f3; border-left:3px solid var(--green); padding:8px 12px;
+    font-family:"Courier New",monospace; font-size:11px; color:var(--dark); margin:8px 0;
+  }
+  .pill{display:inline-block; background:var(--green); color:#fff; font-size:9px;
+    padding:2px 8px; border-radius:10px; font-weight:700; margin-right:4px;}
+  .pill.red{background:var(--red);} .pill.gold{background:var(--gold); color:var(--dark);}
+
+  /* COVER */
+  .cover{
+    background:linear-gradient(160deg,#0d2c1e 0%,#12402a 55%,#0a2418 100%);
+    color:#fff; height:297mm; overflow:hidden; padding:0; display:flex; flex-direction:column;
+    justify-content:space-between; page-break-after:always;
+  }
+  .cover .top{padding:20mm 18mm 0 18mm;}
+  .cover .band{height:10px; display:flex;}
+  .cover .band .g{flex:1; background:var(--gold);} .cover .band .r{flex:1; background:var(--green);}
+  .cover .mid{padding:0 18mm;}
+  .cover h1{color:#fff; font-size:46px; font-weight:900; line-height:1.05; margin:0;}
+  .cover .sub{color:var(--gold); font-size:20px; font-weight:700; margin-top:8px;}
+  .cover .quote{color:#cfe8d8; font-style:italic; font-size:14px; max-width:150mm; margin-top:22px; line-height:1.6;}
+  .cover .bottom{padding:0 18mm 22mm 18mm;}
+  .cover .metarow{display:flex; gap:26px; margin-top:14px;}
+  .cover .metarow div .l{color:#8fd3ab; font-size:10px; text-transform:uppercase; letter-spacing:1px;}
+  .cover .metarow div .v{color:#fff; font-size:15px; font-weight:700;}
+  .cover .powerup{color:#fff;}
+</style>
+</head>
+<body>
+
+<!-- Official Castrol logo (2023), defined once and reused on every page -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="castrol-logo" viewBox="0 0 456 110">
+      <path d="M50.063 47.38h57.946a52.54 52.54 0 0 0-2.461-9.98H52.18c-4.241 0-5.937-1.592-5.3-5.202L52.583 2.13a54.674 54.674 0 0 0-4.355.428l-8.453 32.184c-2.334 9.022.638 12.631 10.282 12.631z" fill="#FFF"/>
+      <path d="M46.88 63.098c-15.581 0-22.572-8.6-17.807-22.191l13.09-37.132a52.672 52.672 0 0 0-4.734 1.483L21.01 42.92c-7.735 17.84 2.017 30.151 24.59 30.151h59.823a53.002 53.002 0 0 0 2.527-9.98H46.868z" fill="#FFF"/>
+      <path d="M52.18 37.4h53.368C98.28 16.8 78.675 2.04 55.628 2.04c-1.023 0-2.034.03-3.038.09l-5.704 30.068c-.637 3.61 1.059 5.201 5.3 5.201z" fill="#009343"/>
+      <path d="M21.023 42.925l16.418-37.66c-20.1 7.358-34.207 26.493-34.73 48.4-.277 60.395 81.45 75.318 102.729 19.418H45.617c-22.578 0-32.324-12.318-24.588-30.152z" fill="#009343"/>
+      <path d="M46.88 63.098h61.08c.398-2.616.602-5.292.602-8.016a52.11 52.11 0 0 0-.56-7.697H50.058c-9.644 0-12.61-3.61-10.282-12.631L48.228 2.57c-2.064.29-4.085.693-6.064 1.212l-13.091 37.13c-4.771 13.591 2.226 22.192 17.807 22.192zM126.039 60c0-22.065 16.303-38.717 38.009-38.717 13.764 0 24.67 8.064 29.219 20.685l-15.244 4.35c-2.328-6.786-8.05-10.607-15.455-10.607-12.598 0-21.706 9.656-21.706 22.908 0 10.397 6.672 17.292 17.47 17.292 7.304 0 13.873-3.924 17.152-10.607l13.446 6.786c-6.353 11.245-18.421 18.454-32.084 18.454-18.42 0-30.807-13.15-30.807-30.55zm66.073 5.942c0-17.182 13.025-31.292 28.799-31.292 7.41 0 12.916 2.544 16.519 7.745l2.756-6.256h11.538l-5.612 53.036h-13.657l.74-6.256c-4.764 5.195-10.696 7.745-18.108 7.745-13.127 0-22.975-10.715-22.975-24.716zm43.303-5.195c0-7.745-5.402-13.048-13.343-13.048-9.211 0-16.201 7.316-16.201 16.863 0 7.744 5.185 13.048 13.127 13.048 9.318 0 16.41-7.317 16.41-16.863zm73.269 10.607l2.328-22.064H301.8l1.378-13.15h9.21l1.168-10.716 14.083-4.135-1.588 14.85h11.966l-1.378 13.15h-11.966l-2.328 22.065c-.421 4.351 1.907 5.623 7.2 5.623 1.168 0 2.757-.109 4.236-.21l-1.377 12.408c-2.647.32-4.975.422-7.093.422-13.765 0-17.892-6.045-16.622-18.243zm31.024 17.816l5.613-53.037h11.539l1.48 6.256c4.127-4.881 10.696-7.316 16.832-7.316l-1.48 14.21h-2.225c-7.52 0-14.403 4.353-15.353 13.58l-2.756 26.306h-13.656zm33.455-23.439c0-17.29 13.765-31.08 31.024-31.08 14.613 0 25.2 10.716 25.2 24.926 0 17.291-13.763 31.081-31.023 31.081-14.613 0-25.201-10.715-25.201-24.927zm42.455-4.984c0-7.533-5.084-12.729-12.814-12.729-9 0-15.882 7.106-15.882 16.55 0 7.534 5.083 12.728 12.814 12.728 9 0 15.882-7.105 15.882-16.549zm16.947 28.423l6.672-63.746 14.083-4.135-7.093 67.886H432.57zM251.29 76.025l13.874-4.665c1.799 4.563 5.084 6.895 9.95 6.895 4.868 0 7.412-1.802 7.412-4.346 0-7.636-25.092-4.133-25.092-20.575 0-10.818 9.318-18.666 22.024-18.666 9 0 15.774 5.305 18.529 14.743l-13.445 3.82c-1.06-4.243-3.387-6.364-6.991-6.364-3.604 0-6.034 2.013-6.034 4.563 0 7.533 25.412 3.073 25.412 20.792 0 10.927-9.422 18.454-23.505 18.454-11.117 0-18.637-4.984-22.127-14.64z" fill="#F00023"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ COVER ============ -->
+<section class="cover">
+  <div>
+    <div class="band"><i class="g"></i><i class="r"></i></div>
+    <div class="top">
+      <div class="logo">
+        <svg class="logo-svg" viewBox="0 0 456 110"><use href="#castrol-logo"/></svg>
+        <span class="powerup" style="margin-left:12px;">P<b>O</b>WER UP 4.0 — The Ultimate Case Study Battle</span>
+      </div>
+    </div>
+  </div>
+  <div class="mid">
+    <div style="color:var(--gold); font-weight:800; letter-spacing:3px; font-size:13px;">GLOBAL SUPPLY CHAIN · BALANCING ACT</div>
+    <h1>Optimizing Production<br>&amp; Distribution<br>for Levisol</h1>
+    <div class="sub">Inventory Norms · Least-Cost Sourcing · A Working Planning Tool</div>
+    <div class="quote">"With more demand than we can produce, every decision has a cost. The question is: which cost are you willing to pay?" — and we built the tool that answers it, every month, for any input.</div>
+  </div>
+  <div class="bottom">
+    <div class="band" style="margin-bottom:16px;"><i class="g"></i><i class="r"></i></div>
+    <div class="metarow">
+      <div><div class="l">Total Plan Cost</div><div class="v">₹9.75 crore</div></div>
+      <div><div class="l">Customer Demand Met</div><div class="v">100%</div></div>
+      <div><div class="l">SKUs · CFAs · Plants</div><div class="v">100 · 10 · 3</div></div>
+      <div><div class="l">Planning Month</div><div class="v">January 2026</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAGE 1: EXECUTIVE SUMMARY ============ -->
+<section class="page">
+  <div class="brandbar">
+    <div class="logo"><svg class="logo-svg" viewBox="0 0 456 110"><use href="#castrol-logo"/></svg></div>
+    <span class="powerup">P<b>O</b>WER UP 4.0</span>
+  </div>
+
+  <div class="ribbon"><span class="tag">01</span> Executive Summary</div>
+
+  <p>Levisol faces a base-oil price shock: leadership must <strong>release cash and cut distribution cost</strong> without letting critical SKUs stock out. We were engaged to redesign inventory norms, build a least-cost production &amp; sourcing plan for January 2026, and deliver a <strong>self-service planning tool</strong> the team can run every month.</p>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v">₹9.75 cr</div><div class="l">Total OpEx (proven optimal)</div></div>
+    <div class="kpi gold"><div class="v">100%</div><div class="l">Customer fill rate</div></div>
+    <div class="kpi blue"><div class="v">8,110 kl</div><div class="l">Demand planned</div></div>
+    <div class="kpi red"><div class="v">99.0%</div><div class="l">Hub buffer achieved</div></div>
+  </div>
+
+  <div class="win">
+    <strong>The headline:</strong> Our optimised January plan meets <strong>every unit of customer demand at ₹9.75 crore</strong> — solved to proven optimality. The only under-fill anywhere is 17.6 kl of <em>internal hub buffer</em> (1.0% of target) on production lines already at 100% capacity — no customer order is affected. Routing follows freight economics exactly: the cheapest plant (Kolkata, ₹9,000/kl) feeds the East hub via its ₹1,100/kl lane; Mumbai feeds the West hub via its ₹1,000/kl lane.
+  </div>
+
+  <h3>What we deliver against the three components</h3>
+  <table>
+    <tr><th>Component</th><th>What we built</th><th>Output</th></tr>
+    <tr><td><strong>1 · Inventory Norms</strong></td><td>Statistical engine: safety stock, reorder point &amp; days-of-cover from demand + lead-time variability</td><td>957 SKU×CFA + 151 SKU×Hub norm rows</td></tr>
+    <tr><td><strong>2 · Production &amp; Distribution Plan</strong></td><td>Mixed-Integer optimisation minimising total landed cost</td><td>₹9.75 cr plan, 100% served</td></tr>
+    <tr><td><strong>3 · Planning Tool</strong></td><td>Streamlit web app — edit any input, one-click re-plan, map &amp; cost views</td><td>Live, non-technical-ready</td></tr>
+  </table>
+
+  <div class="grid2">
+    <div>
+      <h3>Where the money goes</h3>
+      <img class="chart" src="assets/cost_breakdown.png" alt="cost breakdown">
+    </div>
+    <div>
+      <h3>Why this wins on all four judged dimensions</h3>
+      <div class="callout" style="margin-top:6px;">
+        <span class="pill">Analytical rigor</span> forecast-error-based safety stock + a correctly-formulated MILP.<br>
+        <span class="pill gold">Solution quality</span> 100% service at a benchmarked least cost.<br>
+        <span class="pill red">Tool quality</span> handles capacity / demand / cost shocks without crashing.<br>
+        <span class="pill">Communication</span> every assumption documented and defensible.
+      </div>
+    </div>
+  </div>
+
+  <p class="small muted">This document summarises the analytical approach and results. The working tool, full data outputs (Excel), methodology document and source code accompany this submission.</p>
+
+  <div class="foot"><span>Levisol Supply Chain · Balancing Act</span><span class="pageno"></span><span>Power Up 4.0 · Confidential Submission</span></div>
+</section>
+
+<!-- ============ PAGE 2: PROBLEM & APPROACH ============ -->
+<section class="page">
+  <div class="brandbar"><div class="logo"><svg class="logo-svg" viewBox="0 0 456 110"><use href="#castrol-logo"/></svg></div><span class="powerup">P<b>O</b>WER UP 4.0</span></div>
+  <div class="ribbon"><span class="tag">02</span> The Problem &amp; Our Approach</div>
+
+  <h3>The three-tier network</h3>
+  <p>Product flows from <strong>3 plants → 2 mother hubs → 10 CFAs → customers</strong>. Any plant may supply any hub, and CFAs may draw from either hub — so routing is a genuine optimisation, not a fixed map. All volumes are in <strong>kl (kilolitres = 1,000 L)</strong>.</p>
+
+  <div class="grid2">
+    <div>
+      <table>
+        <tr><th>Plant</th><th>Location</th><th class="num">Prod. cost ₹/kl</th></tr>
+        <tr><td>BOM</td><td>Mumbai</td><td class="num">12,000</td></tr>
+        <tr><td>AHM</td><td>Ahmedabad</td><td class="num">12,500</td></tr>
+        <tr><td>KOL</td><td>Kolkata</td><td class="num">9,000</td></tr>
+      </table>
+    </div>
+    <div>
+      <table>
+        <tr><th>Hub</th><th>Serves</th></tr>
+        <tr><td>MHW (West)</td><td>North / West / South CFAs</td></tr>
+        <tr><td>MHE (East)</td><td>East CFAs + Kanpur</td></tr>
+      </table>
+      <p class="small muted">10 CFAs across East, North, West &amp; South. 100 SKUs, tiered A–D by volume; 18 carry contractual supply commitments.</p>
+    </div>
+  </div>
+
+  <h3>The interlinked decisions</h3>
+  <ul>
+    <li><strong>How much buffer stock</strong> each CFA and hub should hold per SKU, and when to reorder — absorbing demand &amp; lead-time uncertainty.</li>
+    <li><strong>What to produce, where, and how to route it</strong> for January at least cost.</li>
+    <li><strong>Which demand to protect vs. sacrifice</strong> if capacity is short — respecting tier priority and contractual obligations.</li>
+  </ul>
+
+  <h3>Our modelling philosophy</h3>
+  <div class="callout">
+    <div class="h">Norms and the plan are solved together, not in isolation</div>
+    The hub safety-stock computed in Component 1 flows directly into Component 2 as a target the optimiser must fund — so the production plan already carries the buffer the network needs. The two components share one codebase, so they can never drift apart.
+  </div>
+
+  <p>We optimise a single, business-meaningful objective — <strong>total operating cost</strong> — and treat unmet demand not as a model failure but as a <em>priced choice</em>, exactly as a planner would weigh it. This guarantees the tool always returns an actionable plan, even when demand exceeds capacity.</p>
+
+  <div class="win">
+    <strong>Design principle:</strong> "The best supply chain is not the one that never runs short — it is the one that knows, in advance, exactly what it will run short of, why, and what it will cost." Our tool makes that trade-off explicit and editable.
+  </div>
+
+  <h3>How the three components connect</h3>
+  <div class="flow">
+    <div class="step"><b>1 · Inventory Norms</b><span>safety stock, reorder points &amp; days of cover per SKU-location</span></div>
+    <div class="link"><i>→</i><em>hub buffer targets</em></div>
+    <div class="step"><b>2 · Production &amp; Distribution Plan</b><span>least-cost MILP funds those buffers</span></div>
+    <div class="link"><i>→</i><em>one shared codebase</em></div>
+    <div class="step"><b>3 · Planning Tool</b><span>planners re-run both, monthly, on any input</span></div>
+  </div>
+
+  <div class="foot"><span>Levisol Supply Chain · Balancing Act</span><span class="pageno"></span><span>Power Up 4.0 · Confidential Submission</span></div>
+</section>
+
+<!-- ============ PAGE 3: COMPONENT 1 ============ -->
+<section class="page">
+  <div class="brandbar"><div class="logo"><svg class="logo-svg" viewBox="0 0 456 110"><use href="#castrol-logo"/></svg></div><span class="powerup">P<b>O</b>WER UP 4.0</span></div>
+  <div class="ribbon"><span class="tag">03</span> Component 1 — Inventory Norms</div>
+
+  <p>For every SKU at every CFA (957 combinations) and every hub (151), we compute <strong>safety stock, reorder point (kl) and days of cover</strong>. The method accounts for <em>both</em> demand variability and supply lead-time variability — a demand-only buffer would understate risk during a supply shock.</p>
+
+  <h3>How demand uncertainty is measured — forecast error, not raw sales</h3>
+  <p>Because next month is planned against a <strong>forecast</strong> (not known demand), the risk safety stock guards against is the <strong>forecast being wrong</strong> over the lead time. We therefore size the demand-uncertainty term from the <strong>forecast-error RMSE</strong> (actual sales vs. forecast over the 6-month history) — the textbook (Silver-Peterson-Pyke) input — rather than raw sales volatility.</p>
+
+  <h3>The safety-stock formula (variable demand &amp; variable lead time)</h3>
+  <div class="formula">Safety Stock = z × √( LT × σ<sub>demand</sub>²  +  demand² × σ<sub>leadtime</sub>² )<br>
+  Reorder Point = (avg daily demand × LT) + Safety Stock<br>
+  Days of Cover = Reorder Point ÷ avg daily demand</div>
+  <p class="small"><strong>z</strong> is the service-level factor: hubs are held at a flat <strong>98%</strong> (z=2.05) per the brief; CFA norms use tier fill-rate targets — <strong>A 98% (z=2.05), B 97% (z=1.88), C &amp; D 92% (z=1.41)</strong>. σ<sub>leadtime</sub> combines production &amp; transit variability from the lead-time data. Hub norms aggregate CFA demand with <strong>risk pooling</strong> (independent CFA variances sum), so a hub holds far less than the sum of its CFAs' buffers.</p>
+
+  <div class="callout">
+    <div class="h">Worked example — SKU_001 at Kolkata CFA (Tier A)</div>
+    Avg daily demand <strong>4.2 kl</strong> · lead time <strong>3 days</strong> · z <strong>2.05</strong> → Safety Stock <strong>12.6 kl</strong>, Reorder Point <strong>25.2 kl</strong>, Days of Cover <strong>6.0</strong>. When Kolkata's on-hand stock of SKU_001 hits ~25 kl, a replenishment is triggered.
+  </div>
+
+  <div class="grid2">
+    <div>
+      <h3>Tier mix across the portfolio</h3>
+      <img class="chart" src="assets/tier_donut.png" alt="tier distribution">
+      <p class="small muted">SKUs classified A–D by cumulative share of 6-month sales volume, matching the Exhibit F slabs (50/30/15/5%).</p>
+    </div>
+    <div>
+      <h3>Norm outputs delivered</h3>
+      <table>
+        <tr><th>Output</th><th class="num">Rows</th></tr>
+        <tr><td>CFA norms (SKU × CFA)</td><td class="num">957</td></tr>
+        <tr><td>Hub norms (SKU × Hub)</td><td class="num">151</td></tr>
+        <tr><td>SKU tier classification</td><td class="num">100</td></tr>
+      </table>
+      <p class="small">Each row carries: avg &amp; daily demand, forecast-error σ, lead time &amp; its σ, z, <strong>safety stock, reorder point, days of cover</strong>, tier, penalty and contractual flag. Full table in <em>inventory_norms.xlsx</em>.</p>
+    </div>
+  </div>
+
+  <div class="foot"><span>Levisol Supply Chain · Balancing Act</span><span class="pageno"></span><span>Power Up 4.0 · Confidential Submission</span></div>
+</section>
+
+<!-- ============ PAGE 4: COMPONENT 2 (plan) ============ -->
+<section class="page">
+  <div class="brandbar"><div class="logo"><svg class="logo-svg" viewBox="0 0 456 110"><use href="#castrol-logo"/></svg></div><span class="powerup">P<b>O</b>WER UP 4.0</span></div>
+  <div class="ribbon"><span class="tag">04</span> Component 2 — Production &amp; Distribution Plan</div>
+
+  <h3>Objective &amp; constraints (in business language)</h3>
+  <p><strong>Minimise:</strong> production cost + plant→hub freight + hub→CFA freight + penalty for any unmet demand + penalty for any hub-buffer shortfall.</p>
+  <p><strong>Subject to:</strong> plant line-type capacities · the <strong>25 kl batch rule</strong> (production in whole batches) · flow balance at every hub and CFA · starting inventory · and hub safety-stock targets from Component 1.</p>
+
+  <div class="callout">
+    <div class="h">The key modelling choice — unmet demand is priced, not forbidden</div>
+    If demand exceeds capacity, a hard model would simply fail. Instead each SKU's shortfall carries its Exhibit-D penalty, and <strong>contractual SKUs carry a 5× multiplier</strong> so they are protected first. The optimiser then chooses the least-damaging demand to miss — and always returns a usable plan.
+  </div>
+
+  <div class="grid2">
+    <div><img class="chart" src="assets/production_by_plant.png" alt="production by plant"></div>
+    <div class="kpicol">
+      <div class="kpi"><div class="v">6,800 kl</div><div class="l">Produced (in 25 kl batches)</div></div>
+      <div class="kpi blue"><div class="v">2,973 kl</div><div class="l">Demand met from CFA opening stock</div></div>
+      <div class="kpi gold"><div class="v">5,136 kl</div><div class="l">Shipped fresh via hubs</div></div>
+    </div>
+  </div>
+
+  <h3>Plant → Hub routing (kl)</h3>
+  <table>
+    <tr><th>From \ To</th><th class="num">Mother Hub West</th><th class="num">Mother Hub East</th></tr>
+    <tr><td>KOL (Kolkata)</td><td class="num">30</td><td class="num">2,181</td></tr>
+    <tr><td>BOM (Mumbai)</td><td class="num">3,387</td><td class="num">1</td></tr>
+    <tr><td>AHM (Ahmedabad)</td><td class="num">253</td><td class="num">77</td></tr>
+  </table>
+  <p class="small muted">Cheap lanes dominate (Mumbai→MHW ₹1,000, Kolkata→MHE ₹1,100); expensive cross-country lanes (Mumbai→MHE ₹8,000, Kolkata→MHW ₹10,000) are avoided.</p>
+
+  <h3>What we chose not to supply — and why</h3>
+  <p><strong>No customer demand was sacrificed.</strong> The only under-fill is 17.6 kl of hub buffer (1.0% of the 1,760.8 kl target) on SKUs whose production lines are fully utilised: topping those buffers would require producing on a costlier plant/line, and that cost exceeds the priced risk of a marginally thinner buffer. Because it is a <em>priced</em> decision, a planner who disagrees can raise the buffer weight in the tool and the model will instead protect it.</p>
+
+  <div class="foot"><span>Levisol Supply Chain · Balancing Act</span><span class="pageno"></span><span>Power Up 4.0 · Confidential Submission</span></div>
+</section>
+
+<!-- ============ PAGE 5: NETWORK MAP + TOOL ============ -->
+<section class="page">
+  <div class="brandbar"><div class="logo"><svg class="logo-svg" viewBox="0 0 456 110"><use href="#castrol-logo"/></svg></div><span class="powerup">P<b>O</b>WER UP 4.0</span></div>
+  <div class="ribbon"><span class="tag">05</span> The Network Plan &amp; the Planning Tool</div>
+
+  <img class="chart" src="assets/app_map_crop.png" alt="January 2026 network flow on India map">
+  <p class="small muted">Live from the planning tool's <strong>🗺️ Network Map</strong> tab: every optimised lane drawn geographically — <span style="color:var(--green); font-weight:700;">green = plant → hub</span>, <span style="color:var(--blue); font-weight:700;">blue = hub → CFA</span>; line thickness ∝ volume, and hovering any lane in the app shows its exact kl. The two trunk lanes the freight economics predict — Mumbai → MHW and Kolkata → MHE — visibly dominate, with blue spokes fanning out to all ten CFAs.</p>
+
+  <div class="ribbon" style="background:var(--green);"><span class="tag" style="background:#fff;">Component 3</span> A tool a planner — not a data scientist — can run every month</div>
+
+  <div class="grid2">
+    <div>
+      <h3>What the tool does</h3>
+      <ul>
+        <li><strong>Editable inputs</strong> — plant capacity, production &amp; transport costs, and demand are all editable in-app (or via CSV upload); no code.</li>
+        <li><strong>One-click re-plan</strong> — recomputes norms + the full optimisation in under two minutes.</li>
+        <li><strong>Actionable output</strong> — production plan, plant-hub-CFA routing, cost summary, inventory norms, and an explicit unmet-demand report.</li>
+        <li><strong>Graceful under stress</strong> — if demand can't be met it reports what, how much, and the cost — never crashes.</li>
+        <li><strong>Visual</strong> — cost breakdown, and an India network-flow map.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Built for the "changed input" test</h3>
+      <p>On assessment day a modified input set is provided 30 minutes before. Our tool absorbs a change to any capacity, demand, or cost figure and produces a revised plan on the spot.</p>
+      <div class="win">
+        <strong>Stack:</strong> Python · PuLP with the open-source HiGHS MILP solver (reproducible, proven-optimal solutions) · Streamlit UI · Plotly. Runs on a laptop; no licences required.
+      </div>
+      <p class="small muted">The three views — Inventory Norms, Production &amp; Distribution Plan, and Network Map — are labelled by the business question they answer, so a first-time user needs no manual. <strong>A screen-by-screen walkthrough with live screenshots follows on the next two pages.</strong></p>
+    </div>
+  </div>
+
+  <div class="foot"><span>Levisol Supply Chain · Balancing Act</span><span class="pageno"></span><span>Power Up 4.0 · Confidential Submission</span></div>
+</section>
+
+<!-- ============ PAGE 6: TOOL SCREENSHOTS — WORKSPACE ============ -->
+<section class="page">
+  <div class="brandbar"><div class="logo"><svg class="logo-svg" viewBox="0 0 456 110"><use href="#castrol-logo"/></svg></div><span class="powerup">P<b>O</b>WER UP 4.0</span></div>
+  <div class="ribbon"><span class="tag">06</span> The Tool, Screen by Screen — The Workspace</div>
+
+  <p>Live screenshots of the tool running on the case data. Try it yourself — the tool is hosted on Streamlit Cloud at <strong style="background:#fff3bf; padding:1px 6px; border-radius:3px;">HOSTED-LINK-HERE</strong> (it also runs locally: <span style="font-family:'Courier New',monospace;">streamlit run app.py</span>). Everything below is one screen: inputs on the left, four result views as tabs.</p>
+
+  <h3>The workspace — sidebar inputs + four tabbed views</h3>
+  <img class="chart" src="assets/app_landing.png" alt="tool workspace" style="width:80%; display:block; margin-left:auto; margin-right:auto;">
+
+  <div class="grid2">
+    <div>
+      <h3>Left sidebar — what a planner can change</h3>
+      <ul class="small">
+        <li><strong>Plant capacities &amp; production cost</strong> — edit any cell of Exhibit A directly.</li>
+        <li><strong>Plant → Hub</strong> and <strong>Hub → CFA transport cost</strong> — reprice any lane (Exhibits B &amp; C).</li>
+        <li><strong>Jan-2026 demand forecast</strong> — edit rows in-app or upload a replacement CSV (100 SKUs × 10 CFAs).</li>
+        <li><strong>Solver time limit</strong> slider (10–300 s) — speed vs. precision trade-off, planner's choice.</li>
+        <li><strong>▶ Run Plan</strong> re-computes norms + the full optimisation; <strong>Reset</strong> restores the original case data.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>The four tabs — one view per business question</h3>
+      <ul class="small">
+        <li><strong>📦 Inventory Norms</strong> — "how much buffer should each location hold?" All 957 CFA + 151 hub norm rows (safety stock, reorder point, days of cover), with CSV downloads.</li>
+        <li><strong>🏭 Production &amp; Distribution Plan</strong> — "what do we make, where, and what does it cost?" (screenshot overleaf).</li>
+        <li><strong>🗺️ Network Map</strong> — "how does product move?" The plan drawn on India's map (overleaf).</li>
+        <li><strong>📊 Raw Data</strong> — the exact inputs the current scenario is using, for full transparency.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot"><span>Levisol Supply Chain · Balancing Act</span><span class="pageno"></span><span>Power Up 4.0 · Confidential Submission</span></div>
+</section>
+
+<!-- ============ PAGE 7: TOOL SCREENSHOTS — OUTPUTS ============ -->
+<section class="page">
+  <div class="brandbar"><div class="logo"><svg class="logo-svg" viewBox="0 0 456 110"><use href="#castrol-logo"/></svg></div><span class="powerup">P<b>O</b>WER UP 4.0</span></div>
+  <div class="ribbon"><span class="tag">07</span> The Tool, Screen by Screen — The Outputs</div>
+
+  <h3>🏭 Production &amp; Distribution Plan tab — the decision screen</h3>
+  <img class="chart" src="assets/app_plan_crop.png" alt="plan tab output">
+  <p class="small muted">One click of <strong>▶ Run Plan</strong>: solver status, the cost KPIs, overall fill rate and an explicit unmet-demand report — the green banner confirms nothing was left short. Below it in the app: the full SKU × plant production table in 25 kl batches, plant→hub and hub→CFA routing tables, hub safety-stock tracking, and a cost-breakdown chart, all downloadable as CSV. This live 60-second interactive run lands at ₹9.78 cr, 100% fill — within 0.3% of the proven-optimal ₹9.75 cr plan published in this report; raising the time-limit slider closes the gap.</p>
+
+  <h3>📦 Inventory Norms tab — Component 1, live</h3>
+  <img class="chart" src="assets/app_norms_crop.png" alt="inventory norms tab">
+  <p class="small muted">Every SKU × CFA norm — safety stock, reorder point and days of cover from demand + lead-time variability — computed on the fly for all 957 combinations, with one-click CSV download. Hub-level norms (98% service level) sit just below in the app.</p>
+
+  <div class="foot"><span>Levisol Supply Chain · Balancing Act</span><span class="pageno"></span><span>Power Up 4.0 · Confidential Submission</span></div>
+</section>
+
+<!-- ============ PAGE 8: ROBUSTNESS + ASSUMPTIONS ============ -->
+<section class="page">
+  <div class="brandbar"><div class="logo"><svg class="logo-svg" viewBox="0 0 456 110"><use href="#castrol-logo"/></svg></div><span class="powerup">P<b>O</b>WER UP 4.0</span></div>
+  <div class="ribbon"><span class="tag">08</span> Robustness &amp; Key Assumptions</div>
+
+  <h3>Stress-tested against every input-shock type the brief names</h3>
+  <img class="chart" src="assets/robustness.png" alt="robustness">
+  <table>
+    <tr><th>Scenario</th><th>Status</th><th class="num">Total cost</th><th class="num">Unmet</th></tr>
+    <tr><td>Base plan</td><td>Optimal</td><td class="num">₹9.75 cr</td><td class="num">0 kl</td></tr>
+    <tr><td>BOM capacity −50%</td><td>Optimal</td><td class="num">₹10.00 cr</td><td class="num">0 kl</td></tr>
+    <tr><td>Demand +40%</td><td>Optimal</td><td class="num">₹15.95 cr</td><td class="num">6.6 kl</td></tr>
+    <tr><td>BOM→MHW freight ×5</td><td>Optimal</td><td class="num">₹10.86 cr</td><td class="num">0 kl</td></tr>
+  </table>
+  <p class="small muted">Under a genuine capacity squeeze (demand +40%) the tool leaves only 6.6 kl unmet — and protects contractual SKUs first. It never returns an error.</p>
+
+  <h3>Assumptions we make — and stand behind</h3>
+  <table>
+    <tr><th>Assumption</th><th>Rationale</th></tr>
+    <tr><td>SKU tiers derived from cumulative volume share (A 50 / B 30 / C 15 / D 5%)</td><td>Exhibit F defines tiers by volume; the brief gives penalty &amp; contractual flags, not tiers, so we derive them from 6-month sales.</td></tr>
+    <tr><td>Safety stock sized from <strong>forecast error</strong>, not raw sales variance</td><td>Next month is planned on a forecast; buffer must protect against forecast error over the lead time.</td></tr>
+    <tr><td>Contractual SKUs get a <strong>5× penalty</strong> multiplier (soft, not hard)</td><td>Brief says their breach cost "significantly exceeds normal lost margin"; soft keeps the model solvable even if capacity is critically short. Tunable parameter.</td></tr>
+    <tr><td>Batch-rounding surplus held as plant closing inventory (flow ≤ production)</td><td>25 kl batches force minor over-production; keeping it at the plant is cheaper than freighting it downstream — verified: forcing equality was strictly worse.</td></tr>
+    <tr><td>One grease SKU (kg-based) normalised to a volume equivalent</td><td>99 of 100 SKUs are litre-based; normalising keeps the whole model in one consistent unit (kl).</td></tr>
+  </table>
+
+  <div class="win">
+    <strong>Bottom line:</strong> a rigorous analytical core, a benchmarked least-cost plan that serves 100% of customers, and a robust tool any planner can drive — with every choice documented and defensible.
+  </div>
+
+  <div class="foot"><span>Levisol Supply Chain · Balancing Act</span><span class="pageno"></span><span>Power Up 4.0 · Confidential Submission</span></div>
+</section>
+
+</body>
+</html>
