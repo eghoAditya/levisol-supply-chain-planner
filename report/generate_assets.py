@@ -93,7 +93,7 @@ def main():
     ax.set_ylim(0, byp.max() * 1.18)
     for s in ["top", "right"]:
         ax.spines[s].set_visible(False)
-    ax.set_title("Production by plant — cheapest plant (KOL) runs hard",
+    ax.set_title("Production by plant: cheapest plant (KOL) runs hard",
                  fontweight="bold", color=DARK, loc="left", fontsize=11)
     plt.tight_layout()
     plt.savefig(ASSETS / "production_by_plant.png", bbox_inches="tight")
@@ -115,7 +115,7 @@ def main():
         x, y = np.cos(ang), np.sin(ang)
         side = 1 if x >= 0 else -1
         ax.annotate(
-            f"Tier {tier} — {n} SKUs",
+            f"Tier {tier}: {n} SKUs",
             xy=(1.03 * x, 1.03 * y), xytext=(1.42 * side, 1.18 * y),
             ha="left" if side == 1 else "right", va="center",
             fontsize=10.5, color=DARK, fontweight="bold",
@@ -126,7 +126,7 @@ def main():
     ax.text(0, 0, f"{total_sku}\nSKUs", ha="center", va="center",
             fontsize=15, fontweight="bold", color=DARK)
     ax.set_xlim(-1.6, 1.6); ax.set_ylim(-1.3, 1.3)
-    ax.set_title("Portfolio mix — SKU count by tier", fontweight="bold",
+    ax.set_title("Portfolio mix: SKU count by tier", fontweight="bold",
                  color=DARK, fontsize=11.5, pad=10)
     plt.tight_layout()
     plt.savefig(ASSETS / "tier_donut.png", bbox_inches="tight", dpi=170)
@@ -182,7 +182,7 @@ def main():
     s1 = inputs.plants.copy()
     for col in ["cap_1_5lt", "cap_3_5lt", "cap_7_20lt", "cap_50lt", "cap_180_210lt"]:
         s1.loc["BOM", col] = round(s1.loc["BOM", col] * 0.5)
-    scenarios["BOM cap –50%"] = run_plan(replace(inputs, plants=s1), hub_norms, 600)
+    scenarios["BOM cap -50%"] = run_plan(replace(inputs, plants=s1), hub_norms, 600)
     s2 = inputs.jan_forecast.copy(); s2["jan26_forecast_kl"] *= 1.4
     scenarios["Demand +40%"] = run_plan(replace(inputs, jan_forecast=s2), hub_norms, 600)
     s3 = inputs.plant_hub_cost.copy(); s3.loc["BOM", "to_MHW"] *= 5
@@ -225,7 +225,7 @@ def main():
                  fontweight="bold", zorder=4)
     for s in ["top"]:
         ax1.spines[s].set_visible(False); ax2.spines[s].set_visible(False)
-    ax1.set_title("Every input shock re-solves cleanly — cost adapts, service holds",
+    ax1.set_title("Every input shock re-solves cleanly: cost adapts, service holds",
                   fontweight="bold", color=DARK, loc="left", fontsize=11.5, pad=12)
     plt.tight_layout()
     plt.savefig(ASSETS / "robustness.png", bbox_inches="tight", dpi=170)

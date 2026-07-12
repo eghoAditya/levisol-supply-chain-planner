@@ -38,7 +38,7 @@
       "status": "Optimal"
     },
     {
-      "name": "BOM cap \u201350%",
+      "name": "BOM cap -50%",
       "cost_cr": 10.0,
       "unmet_kl": 0.0,
       "status": "Optimal"
